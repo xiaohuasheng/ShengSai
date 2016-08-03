@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShengSai</string>
+    <string name="from_server">来自服务器的回复</string>
+    <string name="send">发送</string>
+</resources>
