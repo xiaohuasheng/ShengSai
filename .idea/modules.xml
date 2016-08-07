@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShengSai.iml" filepath="$PROJECT_DIR$/ShengSai.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clienttwo/clienttwo.iml" filepath="$PROJECT_DIR$/clienttwo/clienttwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multithreadclient/multithreadclient.iml" filepath="$PROJECT_DIR$/multithreadclient/multithreadclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleclient/simpleclient.iml" filepath="$PROJECT_DIR$/simpleclient/simpleclient.iml" />
     </modules>
   </component>
 </project>

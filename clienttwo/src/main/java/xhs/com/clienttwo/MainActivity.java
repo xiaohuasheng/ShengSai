@@ -14,12 +14,60 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable{
+    @Override
+    public void run() {
+        while (true)
+        {
+            if(socket != null) {
+                Log.i("MyTag","********************socket is not null******************");
+                if (socket.isConnected()) {
+                    if (!socket.isInputShutdown()) {
+                        try {
+                                    /*
+                                    byte[] buf = new byte[1024];
+                                    int len = in.read();
+                                    if (len != 0) {
+                                        showData = new String(buf, 0, len);
+                                        Message msg = new Message();
+                                        msg.what = 1;
+                                        msg.obj = showData;
+                                        handler.sendMessage(msg);
+                                        Log.i("MyTag",showData.toString());
+                                    }
+                                    */
+                            showData = in.readLine();
+                            if(showData != null)
+                            {
+                                Message msg = new Message();
+                                msg.what = 1;
+                                msg.obj = showData;
+                                handler.sendMessage(msg);
+                                Log.i("MyTag",showData.toString());
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "input is shutdown", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "socket doesn't connect", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Log.i("MyTag","socket is null");
+            }
+        }
+    }
 
     private EditText edtSend;
     private Button btnSend;
@@ -30,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     private final int PORT = 1234;
 
     private OutputStream out;
-    private InputStream in;
+    //private InputStream in;
+    private BufferedReader in = null;
     private String sendData;
     private String showData;
 
@@ -71,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
                     sendData = jsonObject + "END";
                     out.write(sendData.getBytes());
 
-                    in =  socket.getInputStream();
+                    //in =  socket.getInputStream();
+                    in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -108,43 +158,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new Thread(){
-            @Override
-            public void run() {
-                while (true)
-                {
-                    if(socket != null) {
-                        Log.i("MyTag","********************socket is not null******************");
-                        if (socket.isConnected()) {
-                            if (!socket.isInputShutdown()) {
-                                try {
-                                    byte[] buf = new byte[1024];
-                                    int len = in.read();
-                                    if (len != 0) {
-                                        showData = new String(buf, 0, len);
-                                        Message msg = new Message();
-                                        msg.what = 1;
-                                        msg.obj = showData;
-                                        handler.sendMessage(msg);
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
-                                Toast.makeText(MainActivity.this, "input is shutdown", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "socket doesn't connect", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else
-                    {
-                        Log.i("MyTag","socket is null");
-                    }
-                }
-
-            }
-        }.start();
+        new Thread(MainActivity.this).start();
     }
 
 }

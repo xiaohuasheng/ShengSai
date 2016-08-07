@@ -10,12 +10,18 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/clienttwo" />
+            <option value="$PROJECT_DIR$/multithreadclient" />
+            <option value="$PROJECT_DIR$/simpleclient" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/clienttwo" />
+            <option value="$PROJECT_DIR$/multithreadclient" />
+            <option value="$PROJECT_DIR$/simpleclient" />
           </set>
         </option>
       </GradleProjectSettings>
