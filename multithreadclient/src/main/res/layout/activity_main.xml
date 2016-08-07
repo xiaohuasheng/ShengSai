@@ -32,4 +32,21 @@
         android:id="@+id/btnSend"
         android:layout_below="@+id/edtInput"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getLongitude"
+        android:id="@+id/btnLongitude"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getLatitude"
+        android:id="@+id/btnLatitude"
+        android:layout_below="@+id/btnLongitude"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
 </RelativeLayout>
